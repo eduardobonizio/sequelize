@@ -13,6 +13,9 @@ Instalando o express
 Boas práticas:
   npm install dotenv
 
+Testes:
+  npm i mocha chai sinon chai-http -D
+
 Iniciando o Sequelize-cli:
   npx sequelize-cli init
   Pastas criadas pelo comando:
