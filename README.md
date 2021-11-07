@@ -5,6 +5,11 @@ Instalando o Sequelize:
   npm install sequelize-cli
   npm install mysql2
 
+Instalando o express
+  npm install express
+  npm install nodemon
+  npm install body-parser
+
 Iniciando o Sequelize-cli:
   npx sequelize-cli init
   Pastas criadas pelo comando:
