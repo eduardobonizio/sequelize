@@ -10,6 +10,9 @@ Instalando o express
   npm install nodemon
   npm install body-parser
 
+Boas práticas:
+  npm install dotenv
+
 Iniciando o Sequelize-cli:
   npx sequelize-cli init
   Pastas criadas pelo comando:
@@ -164,27 +167,35 @@ Seeds:
     SHOW COLUMNS FROM users;
     SELECT * FROM users;
 
-Exemplos de consultas ao banco com um servidor express:
-  const { User } = require('../models');
-  const users = await User.findAll();
-  const user = await User.findByPk(id);
-  const user = await User.findOne({ where: { id, email }});
+Exemplos:
+  Exemplos de consultas ao banco com um servidor express:
+    const { User } = require('../models');
+    const users = await User.findAll();
+    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { id, email }});
 
-Exemplo de inserção:
-  const { User } = require('../models');
-  const newUser = await User.create({ fullName, email });
+  Exemplo de inserção:
+    const { User } = require('../models');
+    const newUser = await User.create({ fullName, email });
 
-Exemplo de atualização de dado:
-  const { fullName, email } = req.body;
-  const { id } = req.params;
+  Exemplo de atualização de dado:
+    const { fullName, email } = req.body;
+    const { id } = req.params;
 
-  const [updateUser] = await User.update(
-    { fullName, email },
-    { where: { id } },
-  );
+    const [updateUser] = await User.update(
+      { fullName, email },
+      { where: { id } },
+    );
 
-Exemplo de como deletar:
-  const { id } = req.params;
-  const deleteUser = await User.destroy(
-    { where: { id } },
-  );
+  Exemplo de como deletar:
+    const { id } = req.params;
+    const deleteUser = await User.destroy(
+      { where: { id } },
+    );
+
+Boas práticas:
+  Mudar o config/config.json para usar o dotEnv
+    Renomear o arquivo para config.js
+    Mudar o conteúdo do arquivo para (conforme está na pasta)
+    Modifique a linha 8 do arquivo models/index.js para apontar para o arquivo config.js :
+      const config = require(__dirname + '/../config/config.js')[env];
