@@ -1,8 +1,13 @@
 # sequelize
 
+Resumo para esse projeto funcionar:
+  npm install
+  npx sequelize db:migrate
+  npx sequelize db:seed:all
+  
 Instalando o Sequelize:
   npm install sequelize
-  npm install sequelize-cli
+  npm install --save-dev sequelize-cli
   npm install mysql2
 
 Instalando o express
@@ -99,6 +104,8 @@ Migration:
   Ou reverter a migration com:
     //O undo faz perder os dados da tabela
     npx sequelize db:migrate:undo
+    //Reverter até uma migration específica
+    npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js
   Para verificar o que foi criado:
     mysql -u root -p
     show databases;
@@ -162,6 +169,8 @@ Seeds:
     npx sequelize db:seed:all
   Para reverter:
     npx sequelize db:seed:undo:all
+  Para reverter uma seed específica
+    npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
   Para verificar o que foi criado:
     mysql -u root -p
     show databases;
