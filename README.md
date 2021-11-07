@@ -21,6 +21,9 @@ Boas práticas:
 Testes:
   npm i mocha chai sinon chai-http -D
 
+.sequelizerc
+  Configuração de onde os arquivos do sequelize devem ficar.
+
 Iniciando o Sequelize-cli:
   npx sequelize-cli init
   Pastas criadas pelo comando:
