@@ -20,13 +20,25 @@ Boas práticas:
   npm install dotenv
 
 Resumo de como adicionar conteúdo ao banco de dados:
-  Criar migration:
+  Criar o model:
+     npx sequelize model:generate --name ModelName --attributes ColumnName:type,Column2Name:Type
+  Criar migration ou editar migration criada pelo model:
     npx sequelize migration:generate --name migration-name
   Editar o conteúdo de UP e DOWN da migration
     Aqui podemos definir os tipos, se poderá ser nulo ou não, primary key, foreign key, chave composta.
   Depois de definir as migrations:
     npx sequelize db:migrate
-
+  Editar os models:
+    Aqui podemos definir os tipos, se poderá ser nulo ou não, primary key, foreign key, chave composta.
+      Para criar o relacionamento das tabelas tem que colocar as informações de hasOne, belongsTo, hasMany, belongsToMany no arquivo dos dois models que forem relacionados.
+  Criar as seeds:
+    npx sequelize seed:generate --name seedName
+    Preencher o conteúdo da seed com os dados que serão inseridos nas tabelas
+  Subir as seeds:
+    npx sequelize db:seed:all
+  Remover as seeds:
+    npx sequelize db:seed:undo:all
+    
 Testes:
   npm i mocha chai sinon chai-http -D
 
@@ -102,6 +114,7 @@ Pasta Model:
     module.exports = User;
   //Observe que adicionamos o campo e-mail do tipo string, por aqui podemos adicionar quantas colunas forem necessárias.
 
+  
 Migration:
   Uma migration é uma versão do banco de dados, a cada atualização que ocorre no banco - como adição de coluna - ele gera uma nova migration. As migrations tem as funções UP e DOWN que servem para subir a nova migration (executar as mudanças no banco de dados) ou restaurar um antiga (Up e Down respectivamente).
 
@@ -144,6 +157,20 @@ Migration:
           key: 'id',
         },
       },
+    Depois de adicionar a FK na migration temos que modificar o model para fazer o relacionamento adicionando algo parecido com isso para poder criar o relacionamento ANTES DO RETURN:
+      Employee.associate = (models) => {
+        Employee.hasOne(models.Address,
+        { foreignKey: 'employee_id', as: 'addresses' });
+      };
+    Comandos para realizar a associação:
+      hasOne, belongsTo, hasMany, belongsToMany
+    Relacionamento 1:1
+      Usamos: hasOne e belongsTo
+    Depois disso temos que adicionar o caminho inverso na tabela que pertence a primeira (nessa caso Address pertence a Empolyee):
+      Address.associate = (models) => {
+        Address.belongsTo(models.Employee,
+        { foreignKey: 'employee_id', as: 'employees' });
+      };
 
 Alterando uma tabela já existente:
   Rodar o comando:
