@@ -19,6 +19,14 @@ Instalando o express
 Boas práticas:
   npm install dotenv
 
+Resumo de como adicionar conteúdo ao banco de dados:
+  Criar migration:
+    npx sequelize migration:generate --name migration-name
+  Editar o conteúdo de UP e DOWN da migration
+    Aqui podemos definir os tipos, se poderá ser nulo ou não, primary key, foreign key, chave composta.
+  Depois de definir as migrations:
+    npx sequelize db:migrate
+
 Testes:
   npm i mocha chai sinon chai-http -D
 
@@ -116,6 +124,26 @@ Migration:
     USE orm_example;
     SHOW TABLES;
     SHOW COLUMNS FROM users;
+  
+  Foreign Key:
+    Dentro da migration podemos adicionar uma chave que será a FK, essa chave deve ficar na migration da tabela que pegará a informação da outra.
+    Alguma opções da FK:
+      field: o nome que a FK receberá nessa tabela
+      references.model : Indica qual tabela nossa FK está referenciando.
+      references.key : Indica qual coluna da tabela estrangeira deve ser utilizada para nossa foreign key .
+      onUpdate e onDelete : Configura o que deve acontecer ao atualizar ou excluir um usuário. Nesse caso, todos os produtos daquele usuário serão alterados ou excluídos.
+    Exemplo de uma FK:
+      employeeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        field: 'employee_id',
+        references: {
+          model: 'Employees',
+          key: 'id',
+        },
+      },
 
 Alterando uma tabela já existente:
   Rodar o comando:
