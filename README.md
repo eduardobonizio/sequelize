@@ -24,6 +24,7 @@ Resumo de como adicionar conteúdo ao banco de dados:
     npx sequelize-cli init
   Criar o model:
      npx sequelize model:generate --name ModelName --attributes ColumnName:type,Column2Name:Type
+  Editar o model conforme necessidade
   Criar migration ou editar migration criada pelo model:
     npx sequelize migration:generate --name migration-name
   Editar o conteúdo de UP e DOWN da migration
