@@ -2,6 +2,7 @@
 
 Resumo para esse projeto funcionar:
   npm install
+  npx sequelize db:create
   npx sequelize db:migrate
   npx sequelize db:seed:all
   Configurar o .env (Para os dados do arquivo ./config/config.js)
