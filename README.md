@@ -20,6 +20,8 @@ Boas práticas:
   npm install dotenv
 
 Resumo de como adicionar conteúdo ao banco de dados:
+  Iniciar o sequelize:
+    npx sequelize-cli init
   Criar o model:
      npx sequelize model:generate --name ModelName --attributes ColumnName:type,Column2Name:Type
   Criar migration ou editar migration criada pelo model:
